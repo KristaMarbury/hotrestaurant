@@ -1,7 +1,7 @@
 // dependencies
 // const { table } = require("console");
 const express = require("express");
-const app = express;
+const path = require('path');
 
 //tells node that we are creating an express server
 const app = express();
