@@ -1,7 +1,7 @@
 // dependencies
 // const { table } = require("console");
 const express = require("express");
-const path = require('path');
+const app = express;
 
 //tells node that we are creating an express server
 const app = express();
@@ -12,12 +12,12 @@ app.use(express.json());
 //set initial port
 const PORT = process.env.PORT || 3001;
 
-require('./routes/api-routes')(app);
-require('./routes/html-routes')(app); 
+require('./app/routing/api-routes.js')(app);
+require('./app/routing/html-routes.js')(app); 
 
 
 
-
+app.listen(PORT, () => console.log(`App is listening on PORT ${PORT}`));
 
 
 // // Routes
@@ -59,5 +59,5 @@ require('./routes/html-routes')(app);
 // app.get("/api/waitlist", (req, res) => res.json(waitlist));
 
 
-//start the server
-app.listen(PORT, () => console.log(`App is listening on PORT ${PORT}`));
+// //start the server
+
