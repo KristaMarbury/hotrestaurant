@@ -1,5 +1,5 @@
 // dependencies
-const { table } = require("console");
+// const { table } = require("console");
 const express = require("express");
 const path = require('path');
 
@@ -12,68 +12,51 @@ app.use(express.json());
 //set initial port
 const PORT = process.env.PORT || 3001;
 
-//database
-const tables = [
-  {
-    customerName: "K-Leigh",
-    phoneNumber: "18001800",
-    customerEmail: "nah@yahoo.com",
-    customerID: "255366",
-  },
-  {
-    customerName: "Dick Grayson",
-    phoneNumber: "18001800",
-    customerEmail: "noice@yahoo.com",
-    customerID: "254364",
-  },
-];
+require('./routes/api-routes')(app);
+require('./routes/html-routes')(app); 
 
-const waitlist = [
-  {
-    customerName: "Waiting",
-    phoneNumber: "18001800",
-    customerEmail: "nah@yahoo.com",
-    customerID: "255366",
-  },
-];
 
-// Routes
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, './public/home.html'));
-});
 
-app.get("/tables", (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/tables.html"));
-});
 
-app.get("/reservation", (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/reservation.html"));
-});
 
-app.post("/api/tables", (req, res) => {
-    const newTable = req.body;
-    if (tables.length < 5) {
-        tables.push(newTable);
-        res.json(true);
-    } else {
-        waitlist.push(newTable);
-        res.json(false);
-    }
+
+// // Routes
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, './public/home.html'));
+// });
+
+// app.get("/tables", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./public/tables.html"));
+// });
+
+// app.get("/reservation", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./public/reservation.html"));
+// });
+
+// app.post("/api/tables", (req, res) => {
+//     const newTable = req.body;
+//     if (tables.length < 5) {
+//         tables.push(newTable);
+//         res.json(true);
+//     } else {
+//         waitlist.push(newTable);
+//         res.json(false);
+//     }
     
-});
+// });
 
-//clear out the data
-app.post('/api/clear', (req, res) => {
-    tables.length = 0;
-    waitlist.length =0;
+// //clear out the data
+// app.post('/api/clear', (req, res) => {
+//     tables.length = 0;
+//     waitlist.length =0;
 
-    res.json({ ok: true });
-});
+//     res.json({ ok: true });
+// });
 
-app.get("/api/tables", (req, res) => res.json(tables));
+// app.get("/api/tables", (req, res) => res.json(tables));
 
-//get waitlist tables
-app.get("/api/waitlist", (req, res) => res.json(waitlist));
+// //get waitlist tables
+// app.get("/api/waitlist", (req, res) => res.json(waitlist));
 
 
 //start the server
